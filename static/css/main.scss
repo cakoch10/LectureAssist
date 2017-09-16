@@ -52,7 +52,6 @@ nav {
   .logo {
     text-decoration: none;
     color: $navLogoColor;
-    font-family: 'Rajdhani', sans-serif;
     @media (min-width: 768px) {
       font-size: 1.5rem;
     }
@@ -60,7 +59,9 @@ nav {
     font-size: 1.4rem;
     h1 {
       margin: 0;
-      line-height: 1.8rem;
+      font-family: 'Rajdhani',
+      sans-serif;
+      line-height: 2rem;
       border-bottom: 4px $weakAccentColor solid;
     }
   }

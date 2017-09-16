@@ -39,7 +39,7 @@ def upvote(feedItem):
 
 @socketio.on('Submit Feed Item')
 def submit_item_to_feed(feedItem):
-    print('Feed Item Submitted: ' + feedItem)
+    print('Feed Item Submitted: ' + str(feedItem))
 
 
 if __name__ == '__main__':

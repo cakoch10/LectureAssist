@@ -5,7 +5,12 @@ var sendBtn = Vue.component('send-btn', {
   template: '',
 });
 window.onload = function () {
-
+  var socket = io.connect('http://' + document.domain + ':' + location.port);
+  socket.on('connect', function () {
+    socket.emit('my event', {
+      data: 'I\'m connected!'
+    });
+  });
   var app = new Vue({
     el: '#app',
     components: {
@@ -17,16 +22,11 @@ window.onload = function () {
     },
     methods: {
       sendQuestion: function(question) {
-        alert(question);
+        socket.emit('message', question);
       }
     }
   });
-  var socket = io.connect('http://' + document.domain + ':' + location.port);
-  socket.on('connect', function () {
-    socket.emit('my event', {
-      data: 'I\'m connected!'
-    });
-  });
+
 
   
 }
