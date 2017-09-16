@@ -20,7 +20,6 @@ def student():
 def main():
     return render_template ('student.html')
 
-
 @socketio.on('my event')
 def handle_my_custom_event(json):
     print('received json: ' + str(json))

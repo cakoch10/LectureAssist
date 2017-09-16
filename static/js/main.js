@@ -5,7 +5,7 @@ var sendBtn = Vue.component('send-btn', {
   template: '',
 });
 window.onload = function () {
-  var socket = io.connect('http://' + document.domain + ':' + location.port);
+  var socket = io();
   socket.on('connect', function () {
     socket.emit('my event', {
       data: 'I\'m connected!'
