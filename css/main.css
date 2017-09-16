@@ -1,8 +1,14 @@
+h1, h2, h3, h4, h5 {
+  font-family: 'Montserrat', sans-serif;
+}
+
 html,
 body {
   padding: 0;
+  margin: 0;
   overflow: hidden;
   box-sizing: border-box;
+  font-family: 'Muli', sans-serif;
 }
 
 *,
@@ -48,7 +54,7 @@ nav .logo {
 
 nav .logo h1 {
   margin: 0;
-  line-height: 1.75rem;
+  line-height: 1.8rem;
   border-bottom: 4px #EF223C solid;
 }
 
@@ -83,13 +89,40 @@ nav .logo h1 {
 #input {
   grid-area: input;
   margin: 0px 8px 0px 8px;
-  background-color: #EDF2F4;
+  display: grid;
+  background-color: none;
+  grid-template-columns: 75fr 25fr;
+  grid-column-gap: 16px;
+  grid-template-rows: 50% 50%;
+  grid-template-areas: "inputBox button" "inputBox button";
 }
 
 @media (min-width: 768px) {
   #input {
     margin: 0px 32px 0px 0px;
   }
+}
+
+#input textarea {
+  padding: 16px 20px 16px 20px;
+  grid-area: inputBox;
+  background-color: #EDF2F4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+  outline: none;
+  border: none;
+  resize: none;
+  font-family: 'Muli', sans-serif;
+  font-size: 1.5rem;
+}
+
+#input .send {
+  grid-area: button;
+  background: #D90249;
+  color: #EDF2F4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 footer {
@@ -120,7 +153,7 @@ footer {
     grid-gap: 16px;
     grid-template-columns: 50vw 50vw;
     grid-template-rows: 48px .7fr .25fr auto;
-    grid-template-areas: "header header" "slides feed" "slides input" "footer footer";
+    grid-template-areas: "header header"  "slides feed" "slides input" "footer footer";
   }
 }
 
