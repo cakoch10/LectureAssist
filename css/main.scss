@@ -1,9 +1,9 @@
 // Color Palette
-$baseColor: rgb(43, 45, 66);
-$subColor: rgb(141, 153, 174);
-$textColor: rgb(237, 242, 244);
-$weakAccentColor: rgb(239, 35, 60);
-$strongAccentColor: rgb(217, 4, 41);
+$baseColor: #2B2D42;
+$subColor: #8D99AE;
+$textColor: #EDF2F4;
+$weakAccentColor: #EF223C;
+$strongAccentColor: #D90249;
 
 
 $bodyBackgroundColor: $textColor;
@@ -124,7 +124,6 @@ footer {
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px transparent;
   position: relative;
   overflow: hidden;
 }
@@ -132,16 +131,16 @@ footer {
 .hvr-underline-from-center:before {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   left: 50%;
   right: 50%;
-  bottom: -50px;
-  background: $weakAccentColor;
+  bottom: 0px;
+  background: $textColor;
   height: 4px;
   -webkit-transition-property: left, right;
   transition-property: left, right;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
