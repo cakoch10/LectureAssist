@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -33,8 +33,18 @@ def handle_message(message):
 
 @socketio.on('Upvote Feed Item')
 def upvote(feedItem):
-    print('Feed Item Upvoted')
+    with open('counts.json') as f:
+        countDict = json.load(f)
+    countDict["Feed"][feedItem]["count"] += 1
+    with open('counts.json', 'w') as f:
+        json.dump(countDict, f)
+    return
 
+def getCount(feedItem):
+    with open('counts.json') as f:
+        countDict = json.load(f)
+    count = countDict["Feed"][feedItem]["count"]
+    return count
 
 @socketio.on('Submit Feed Item')
 def submit_item_to_feed(feedItem):
