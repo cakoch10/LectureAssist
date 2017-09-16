@@ -1,4 +1,4 @@
-from flask import Flask, render_template, requests
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 import json
 
@@ -28,7 +28,7 @@ def addQuestion(question):
     string_request["document"] = []
     string_request["document"].append({"type": "PLAIN_TEXT"})
     string_request["document"].append({"content": question})
-    r = requests.post(request_url, json=string_request)
+    r = request.post(request_url, json=string_request)
     response = json.loads(r.text)
     keywords = []
     for e in response["entities"]:
