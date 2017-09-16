@@ -106,7 +106,7 @@ def getJson(feedItem):
     returnDict = {feedItem, count}
     with open('solocount.json', 'w') as f:
         json.dump(returnDict, f)
-    return 
+    return
 
 
 
