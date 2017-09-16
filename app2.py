@@ -18,7 +18,7 @@ def student():
 
 @app.route('/')
 def main():
-    return render_template ('index.html')
+    return render_template ('student.html')
 
 
 @socketio.on('my event')
