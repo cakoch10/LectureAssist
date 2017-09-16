@@ -21,6 +21,7 @@ def student():
 def main():
     return render_template('index.html')
 
+
 @socketio.on('my event')
 def handle_my_custom_event(json):
     print('received json: ' + str(json))
@@ -40,11 +41,14 @@ def upvote(feedItem):
         json.dump(countDict, f)
     return
 
+
+@socketio.on('Get Counter')
 def getCount(feedItem):
     with open('counts.json') as f:
         countDict = json.load(f)
     count = countDict["Feed"][feedItem]["count"]
     return count
+
 
 @socketio.on('Submit Feed Item')
 def submit_item_to_feed(feedItem):
