@@ -17,7 +17,9 @@ window.onload = function () {
     },
     methods: {
       sendQuestion: function(question) {
-        alert(question);
+        socket.emit('message', {
+          data: question + ''
+        });
       }
     }
   });
