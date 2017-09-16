@@ -18,7 +18,7 @@ def student():
 
 @app.route('/')
 def main():
-    return render_template ('index.html')
+    return render_template ('student.html')
 
 
 @socketio.on('my event')
@@ -27,7 +27,7 @@ def handle_my_custom_event(json):
 
 @socketio.on('message')
 def handle_message(message):
-    print('received message: ' + str(message))
+    print('received message: ' + message)
 
 @socketio.on('Upvote Feed Item')
 def upvote(feedItem):

@@ -41,7 +41,6 @@ nav {
 nav .logo {
   text-decoration: none;
   color: #EDF2F4;
-  font-family: 'Rajdhani', sans-serif;
   overflow: visible;
   font-size: 1.4rem;
 }
@@ -54,7 +53,8 @@ nav .logo {
 
 nav .logo h1 {
   margin: 0;
-  line-height: 1.8rem;
+  font-family: 'Rajdhani', sans-serif;
+  line-height: 2rem;
   border-bottom: 4px #EF223C solid;
 }
 
