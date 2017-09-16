@@ -1,0 +1,76 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #252525;
+}
+
+html {
+  font-size: 16px;
+  height: 100%;
+}
+
+nav {
+  grid-area: header;
+  display: flex;
+  background-color: #252525;
+}
+
+nav .logo {
+  margin-top: 4px;
+  text-decoration: none;
+  color: #edf2f4;
+  font-family: 'Rajdhani', sans-serif;
+  overflow: visible;
+  font-size: 1.4rem;
+}
+
+@media (min-width: 768px) {
+  nav .logo {
+    font-size: 1.5rem;
+  }
+}
+
+nav .logo h1 {
+  margin: 0;
+  padding: -20px;
+  border-bottom: 2px solid #ef233c;
+}
+
+#slides {
+  grid-area: slides;
+  background-color: red;
+}
+
+#feed {
+  grid-area: feed;
+  background-color: blue;
+}
+
+#input {
+  grid-area: input;
+  background-color: green;
+}
+
+footer {
+  grid-area: footer;
+  background-color: #252525;
+}
+
+#app {
+  min-height: 100vh;
+  display: grid;
+  max-width: 1200px;
+  grid-template-columns: 100%;
+  grid-template-rows: 50px 1fr .75fr .5fr 30px;
+  grid-template-areas: "header" "slides" "feed" "input" "footer";
+  background-color: #FAFAFA;
+}
+
+@media (min-width: 768px) {
+  #app {
+    grid-template-columns: 50vw 50vw;
+    grid-template-rows: .01fr .7fr .25fr auto;
+    grid-template-areas: "header header" "slides feed" "slides input" "footer footer";
+  }
+}
