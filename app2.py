@@ -1,10 +1,52 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, requests
 from flask_socketio import SocketIO
 import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
+
+
+# Takes a list of keywords and
+# returns the similarity
+def similiarity(keywords1, keywords2):
+    counter = 0
+    for word in keywords1:
+        if word in keywords2:
+            counter += 2
+    return 1.0*counter/(len(keywords1) + len(keywords2))
+
+
+# This method handles a new message
+def addQuestion(question):
+    request_url = \
+        "https://language.googleapis.com/" + \
+        "v1/documents:analyzeEntities?key=" \
+        + "AIzaSyCchGgYUMgG5BYF1mLBxHad-Z6J4jrrVlw"
+    string_request = {}
+    string_request["encodingType"] = "UTF8"
+    string_request["document"] = []
+    string_request["document"].append({"type": "PLAIN_TEXT"})
+    string_request["document"].append({"content": question})
+    r = requests.post(request_url, json=string_request)
+    response = json.loads(r.text)
+    keywords = []
+    for e in response["entities"]:
+        keyword = e["name"]
+        keywords.append(keyword)
+
+    with open('questions.json') as f:
+        quest = json.loads(f)
+    for questionToCompare in quest:
+        s = similiarity(keywords, quest[questionToCompare])
+        if s > 0.5:
+            # we need to return a positive count
+            return 1
+    # at this point the question is new
+    quest[question] = keywords
+    with open('questions.json', 'w') as f:
+        json.dump(quest, f)
+    return 0
 
 
 @app.route('/prof')
