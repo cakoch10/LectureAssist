@@ -7,26 +7,27 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="theme-color" content="#ffffff">
   <title>Lecture Assist</title>
-  <link rel="stylesheet" type="text/css" href="../css/main.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.min.css') }}" />
   <link href="https://fonts.googleapis.com/css?family=Rajdhani:700|Montserrat|Muli" rel="stylesheet">
   <script src="https://use.fontawesome.com/104d9a8f78.js"></script>
   <script src="https://unpkg.com/vue"></script>
-  <script src="../js/main.js"></script>
+  <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 </head>
 
 <body>
   <div id="app">
     <nav class="pane">
-      <a class="logo hvr-underline-from-center" href="./index">
+      <a class="logo hvr-underline-from-center" href="./student">
         <h1>lecture assist</h1>
       </a>
     </nav>
     <div class="pane" id="slides"></div>
     <div class="pane" id="feed"></div>
-    
+
     <div id="input">
-      <input-area></input-area>
-      <button class="pane send" v-on:click="">SEND</button>
+      <textarea class="question-input pane" rows="4" v-model="question"></textarea>
+      <button class="pane send" v-on:click="sendQuestion(question)">SEND</button>
     </div>
     <footer>
 
