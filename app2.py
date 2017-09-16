@@ -78,7 +78,7 @@ def handle_message(message):
 def upvote(feedItem):
     with open('counts.json') as f:
         countDict = json.load(f)
-    countDict["Feed"][feedItem]["count"] += 1
+        countDict[feedItem]["count"] += 1
     with open('counts.json', 'w') as f:
         json.dump(countDict, f)
     return
@@ -86,15 +86,21 @@ def upvote(feedItem):
 
 @socketio.on('Get Counter')
 def getCount(feedItem):
+    count = -1
     with open('counts.json') as f:
         countDict = json.load(f)
-    count = countDict["Feed"][feedItem]["count"]
+        count = countDict[feedItem]["count"]
     return count
 
 
-@socketio.on('Submit Feed Item')
-def submit_item_to_feed(feedItem):
-    print('Feed Item Submitted: ' + str(feedItem))
+@socketio.on('Submit Question')
+def submit_question(question):
+    c = addQuestion(question)
+    if c == 1:
+        with open('counts.json') as f:
+            countDict = json.load(f)
+            countDict[question]["count"] += 1
+    print('Question Submitted: ' + str(question))
 
 
 if __name__ == '__main__':
