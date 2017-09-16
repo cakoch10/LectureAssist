@@ -6,31 +6,41 @@ $weakAccentColor: rgb(239, 35, 60);
 $strongAccentColor: rgb(217, 4, 41);
 
 
-$bodyBackgroundColor: #EFEFEF;
-$navBackgroundColor: #252525;
+$bodyBackgroundColor: $textColor;
+$navBackgroundColor: $baseColor;
 $navLogoColor: $textColor;
 
 
 html,
 body {
   padding: 0;
-  margin: 0;
-  background-color: $navBackgroundColor;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 html {
   font-size: 16px;
   height: 100%;
+  background-color: $baseColor;
 }
 
 nav {
   grid-area: header;
   display: flex;
   background-color: $navBackgroundColor;
-  // justify-content: center;
-  // align-items: center;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4px;
+  @media (min-width: 768px) {
+    margin-bottom: -4px;
+  }
   .logo {
-    margin-top: 4px;
     text-decoration: none;
     color: $navLogoColor;
     font-family: 'Rajdhani', sans-serif;
@@ -41,44 +51,104 @@ nav {
     font-size: 1.4rem;
     h1 {
       margin: 0;
-      padding: -20px;
-      border-bottom: 2px solid $weakAccentColor;
+      line-height: 1.75rem;
+      border-bottom: 4px $weakAccentColor solid;
+      
     }
+ 
   }
+}
+
+.pane {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12),
+    0 3px 6px rgba(0, 0, 0, 0.24);
 }
 
 #slides {
   grid-area: slides;
-  background-color: red;
+  @media (min-width: 768px) {
+      margin: 0px 0px 0px 16px;
+  }
+  margin: 0px 8px 0px 8px;
+  background-color: $textColor;
 }
 
 #feed {
   grid-area: feed;
-  background-color: blue;
+  @media (min-width: 768px) {
+    margin: 0px 32px 0px 0px;
+  }
+  margin: 0px 8px 0px 8px;
+  background-color: $textColor;
 }
 
 #input {
   grid-area: input;
-  background-color: green;
+  @media (min-width: 768px) {
+    margin: 0px 32px 0px 0px;
+  }
+  margin: 0px 8px 0px 8px;
+  background-color: $textColor;
 }
 
 footer {
   grid-area: footer;
+  @media (min-width: 768px) {
+    margin-top: -4px;
+  }
   background-color: $navBackgroundColor
 }
 
 #app {
   min-height: 100vh;
+  padding: 0;
+  margin: 0 auto;
   display: grid;
-  max-width: 1200px;
   @media (min-width: 768px) {
-    // grid-gap: 10px;
+    grid-gap: 16px;
+
     grid-template-columns: 50vw 50vw;
-    grid-template-rows: .01fr .7fr .25fr auto;
+    grid-template-rows: 48px .7fr .25fr auto;
+   
     grid-template-areas: "header header" "slides feed" "slides input" "footer footer";
   }
+  grid-gap: 8px;
   grid-template-columns: 100%;
-  grid-template-rows: 50px 1fr .75fr .5fr 30px;
+  grid-template-rows: 48px 1fr .75fr .5fr 30px;
   grid-template-areas : "header" "slides" "feed" "input" "footer";
-  background-color: #FAFAFA;
+  background-color: $subColor;
+}
+
+  .hvr-underline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.hvr-underline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  right: 50%;
+  bottom: -50px;
+  background: $weakAccentColor;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.hvr-underline-from-center:hover:before,
+.hvr-underline-from-center:focus:before,
+.hvr-underline-from-center:active:before {
+  left: 0;
+  right: 0;
 }
