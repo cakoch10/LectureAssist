@@ -27,7 +27,7 @@ def handle_my_custom_event(json):
 
 @socketio.on('message')
 def handle_message(message):
-    print('received message: ' + str(message))
+    print('received message: ' + message)
 
 @socketio.on('Upvote Feed Item')
 def upvote(feedItem):
