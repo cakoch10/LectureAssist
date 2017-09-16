@@ -46,6 +46,7 @@ def getText():
         quest[question] = keywords
         with open('questions.json', 'w') as f:
             json.dump(quest, f)
+        return {"count": 0}
 
 
 if __name__ == '__main__':
