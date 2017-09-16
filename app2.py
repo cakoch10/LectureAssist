@@ -11,7 +11,7 @@ socketio = SocketIO(app)
 def index():
     return render_template('index2.html')
 
-
+    
 @socketio.on('my event')
 def handle_my_custom_event(json):
     print('received json: ' + str(json))
