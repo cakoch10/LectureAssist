@@ -28,7 +28,7 @@ also compare the string to all existing strings
 '''
 
 
-@app.rout('/getText', methods=['POST', 'GET'])
+@app.route('/getText', methods=['POST', 'GET'])
 def getText():
     # compare text to all strings
     # questions.json stores all the questions
