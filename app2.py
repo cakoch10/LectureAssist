@@ -37,7 +37,6 @@ def upvote(feedItem):
 def submit_item_to_feed(feedItem):
     print('Feed Item Submitted: ' + feedItem)
 
-#hi
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
