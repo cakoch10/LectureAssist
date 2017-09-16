@@ -48,6 +48,13 @@ def addQuestion(question):
         json.dump(quest, f)
     return 0
 
+def getMessages(keywords=[]):
+    returnList = []
+    for keyword in keywords:
+        returnList.append("What does "+keyword+" mean?")
+    returnList.append("Wait, I'm confused")
+    return returnList
+
 
 @app.route('/prof')
 def prof():
@@ -72,6 +79,7 @@ def handle_my_custom_event(json):
 @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message)
+    send(message)
 
 
 @socketio.on('Upvote Feed Item')
@@ -91,6 +99,15 @@ def getCount(feedItem):
         countDict = json.load(f)
         count = countDict[feedItem]["count"]
     return count
+
+@socketio.on('Get Json')
+def getJson(feedItem):
+    count = getCount(feedItem)
+    returnDict = {feedItem, count}
+    with open('solocount.json', 'w') as f:
+        json.dump(returnDict, f)
+    return 
+
 
 
 @socketio.on('Submit Question')
