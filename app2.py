@@ -62,7 +62,7 @@ def addQuestion(question):
     keywords = []
     for e in response["entities"]:
         keyword = e["name"]
-        keywords.append(keyword)
+        keywords.append(keyword.lower())
 
     with open('questions.json') as f:
         quest = json.load(f)
@@ -149,10 +149,10 @@ def getJson(feedItem):
 #@socketio.on('Submit Question')
 def submit_question(question):
     question_orig = question
-    question = question.replace('\n', '').replace('\t', '').strip()
+    question = question.replace('\n', '').replace('\t', '').strip().lower()
     returnedQuest = addQuestion(question)
     if returnedQuest != None:
-        if returnedQuest == question:
+        if returnedQuest.lower() == question.lower():
             with open('counts.json') as f:
                 countDict = json.load(f)
                 print(countDict)
