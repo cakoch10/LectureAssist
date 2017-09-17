@@ -90,7 +90,10 @@ window.onload = function () {
               return;
             }
           }
+          
           socket.emit('message', this.newQuestionText);
+          app.newQuestionText = '';
+          app.newCounter = 0;
           canAskAgain = false;
           wait();
         }
