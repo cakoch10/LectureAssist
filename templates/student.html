@@ -9,6 +9,7 @@
   <title>Lecture Assist</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.min.css') }}" />
   <link href="https://fonts.googleapis.com/css?family=Rajdhani:700|Montserrat|Muli" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://use.fontawesome.com/104d9a8f78.js"></script>
   <script src="https://unpkg.com/vue"></script>
   <script src="{{ url_for('static',filename='js/main.js') }}"></script>
@@ -22,16 +23,31 @@
         <h1>lecture assist</h1>
       </a>
     </nav>
+    <h2 class="feed-header pane" id="feedHeader">Questions</h2>
     <div class="pane" id="slides"></div>
-    <div class="pane" id="feed"></div>
+    <div id="feed">
+    
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+      <feed-entry></feed-entry>
+    </div>
 
     <div id="input">
-      <textarea class="question-input pane" rows="4" v-model="question"></textarea>
+      <button class="show-presets">General Questions</button>
+      <div class="question-input">
+            <textarea rows="4" placeholder="Confused? Ask a question!" v-model="question"></textarea>
+      </div>
+ 
       <button class="pane send" v-on:click="sendQuestion(question)">SEND</button>
     </div>
-    <footer>
-
-    </footer>
 
   </div>
 
