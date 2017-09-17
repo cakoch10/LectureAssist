@@ -50,8 +50,6 @@ window.onload = function () {
     console.log(question);
     question = question.replace('\n','').replace('\t','').trim();
     console.log(question);
-    app.newQuestionText = '';
-    app.newCounter = 0;
     for (var i = 0; i < app.questions.length; i++) {
       if (app.questions[i].text == question) {
         app.questions[i].counter += 1;
@@ -85,7 +83,6 @@ window.onload = function () {
           app.newCounter = 0;
         } else {
           for (var i = 0; i < app.questions.length; i++) {
-            console.log(app.questions[i].text + " - " + this.newQuestionText)
             if (app.questions[i].text == this.newQuestionText) {
               socket.emit('upvote', app.questions[i].text);
               canAskAgain = false;
