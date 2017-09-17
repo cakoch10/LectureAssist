@@ -5,7 +5,6 @@ var feedEntry = Vue.component('feed-entry', {
   <div class="message">{{ question }}</div>
   </div>`,
   props: ['question','counter','index'],
-  // props: ['counter','question'],
   data:
     function() {
       return {
@@ -33,8 +32,8 @@ window.onload = function () {
       text: app.newQuestionText,
       counter: app.newCounter
     });
-    this.newQuestionText = '';
-    this.newCounter = 0;
+    app.newQuestionText = '';
+    app.newCounter = 0;
   });
 
   var app = new Vue({
@@ -55,9 +54,6 @@ window.onload = function () {
         socket.emit('upvote',this.questions[index].text);
         this.questions[index].counter = newCounter;
       }
-    },
-    events: {
-      
     }
   });
 }

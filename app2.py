@@ -116,13 +116,26 @@ def getJson(feedItem):
 
 #@socketio.on('Submit Question')
 def submit_question(question):
-    c = addQuestion(question)
-    if c == 1:
+    question = question.replace('\n', '').replace('\t', '').strip()
+    returnedQuest = addQuestion(question)
+    if returnedQuest == question:
         with open('counts.json') as f:
             countDict = json.load(f)
-            countDict[question]["count"] += 1
+            print('AAAAA')
+            print(countDict)
+            print('AAAAA')
+            countDict[returnedQuest] = 0
+        with open("counts.json", 'w') as f:
+            json.dump(countDict, f)
     else:
-
+        with open('counts.json') as f:
+            countDict = json.load(f)
+            print('AAAAA')
+            print(countDict)
+            print('AAAAA')
+            countDict[returnedQuest] += 1
+        with open("counts.json", 'w') as f:
+            json.dump(countDict, f)
     print('Question Submitted: ' + str(question))
 
 
