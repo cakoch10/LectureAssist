@@ -18,24 +18,31 @@ var feedEntry = Vue.component('feed-entry', {
     }
   }
 });
-
 window.onload = function () {
 
-  var socket = io();
+  var socket = io.connect();
   socket.on('connect', function () {
     socket.emit('my event', {
       data: 'I\'m connected!'
     });
   });
-  socket.on('message', function (msg) {
+  socket.on('new question', function (msg) {
+    console.log(msg);
     app.questions.push({
-      text: app.newQuestionText,
-      counter: app.newCounter
+      text: msg,
+      counter: 0
     });
     app.newQuestionText = '';
     app.newCounter = 0;
   });
-
+  socket.on('upvoted_question', function (question) {
+    console.log(question);
+    for (var i = 0; i < app.questions.length; i++) {
+      if (app.questions[i].text == question) {
+        app.questions[i].counter += 1;
+      }
+    }
+  });
   var app = new Vue({
     el: '#app',
     components: {
@@ -51,8 +58,7 @@ window.onload = function () {
         socket.emit('message', this.newQuestionText);
       },
       incrementCounter: function (index, newCounter) {
-        socket.emit('upvote',this.questions[index].text);
-        this.questions[index].counter = newCounter;
+        socket.emit('upvote', this.questions[index].text);
       }
     }
   });
