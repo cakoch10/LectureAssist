@@ -68,7 +68,7 @@ def addQuestion(question):
         quest = json.load(f)
     for questionToCompare in quest:
         s = similiarity(keywords, quest[questionToCompare])
-        if s > .75:
+        if s >= .5:
             # we need to return a positive count
             return questionToCompare
     # at this point the question is new
