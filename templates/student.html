@@ -23,11 +23,12 @@
         <h1>lecture assist</h1>
       </a>
     </nav>
-    <h2 class="slide-header pane" id="slideHeader">Slides</h2>
+    <h2 class="slide-header pane" id="slideHeader">slides</h2>
     <div class="pane" id="slides">
+      <!-- <iframe class="pdf-viewer" src="http://www.cs.cornell.edu/courses/cs3110/2017fa/l/06-hop/lec.pdf" width="640" height="480"></iframe> -->
       <iframe class="pdf-viewer" src="{{ url_for('static',filename='pdf/test2.pdf') }}" width="640" height="480"></iframe>
     </div>
-    <h2 class="feed-header pane" id="feedHeader">Questions</h2>
+    <h2 class="feed-header pane" id="feedHeader">questions</h2>
     <div id="feed">
      <feed-entry v-for="(q, index) in questions" :key="q.text" 
      :counter="q.counter" :question="q.text" :index="index"
@@ -35,12 +36,11 @@
     </div>
 
     <div id="input">
-      <button class="show-presets">General Questions</button>
       <div class="question-input">
-            <textarea rows="4" placeholder="Confused? Ask a question!" v-model="newQuestionText" v-on:keyup.enter="addNewQuestion"></textarea>
+            <textarea rows="4" placeholder="Confused about something? Click here to ask a question! (Don't worry. You'll stay anonymous)." v-model="newQuestionText" v-on:keyup.enter="addNewQuestion"></textarea>
       </div>
  
-      <button class="pane send" v-on:click="addNewQuestion">SEND</button>
+      <button class="pane send" v-on:click="addNewQuestion">ask</button>
     </div>
 
   </div>

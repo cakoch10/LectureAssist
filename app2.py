@@ -40,7 +40,7 @@ def addQuestion(question):
         tag = tok['partOfSpeech']['tag'].lower()
         tags.append(tag)
     # make sure is a valid question
-    interrogatives = ["which", "what", "whose", "who", "whom"]
+    interrogatives = ["which", "what", "whose", "who", "whom", "is"]
     interrogatives += ["where", "how", "can", "why", "wait", "do", "could","does"]
 
 
@@ -167,6 +167,7 @@ def submit_question(question):
                 countDict[returnedQuest] += 1
             with open("counts.json", 'w') as f:
                 json.dump(countDict, f)
+            emit('upvoted_question', returnedQuest)
         print('Question Submitted: ' + str(question))
         
 

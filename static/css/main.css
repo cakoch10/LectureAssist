@@ -62,7 +62,7 @@ nav .logo h1 {
 
 #slideHeader {
   grid-area: slideHeader;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   margin-top: 0;
   margin-bottom: -16px;
   margin-right: 8px;
@@ -71,7 +71,7 @@ nav .logo h1 {
   background-color: #323639;
   color: #EDF2F4;
   display: flex;
-  padding-left: 16px;
+  justify-content: center;
   align-items: center;
 }
 
@@ -84,8 +84,10 @@ nav .logo h1 {
 
 #slides {
   grid-area: slides;
+  z-index: 1;
+  padding: 0;
   margin: 0px 8px 0px 8px;
-  background-color: #EDF2F4;
+  background-color: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,6 +103,7 @@ nav .logo h1 {
   width: 100%;
   height: 100%;
   border: none;
+  z-index: 1;
 }
 
 #feed {
@@ -129,6 +132,7 @@ nav .logo h1 {
 
 #feed .feed-entry .upvote-count {
   grid-area: upvote;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -138,6 +142,7 @@ nav .logo h1 {
 
 #feed .feed-entry .upvote-btn {
   grid-area: upvoteBtn;
+  display: flex;
   justify-content: center;
   align-items: center;
   border: none;
@@ -156,11 +161,13 @@ nav .logo h1 {
   font-family: 'Muli',sans-serif;
   display: flex;
   align-items: center;
+  word-wrap: break-word;
   padding: 8px 16px 8px 16px;
 }
 
 #input {
   grid-area: input;
+  overflow: hidden;
   z-index: 2;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.24);
   margin: 0px 8px 0px 8px;
@@ -168,9 +175,8 @@ nav .logo h1 {
   background-color: #323639;
   padding: 16px 16px 16px 16px;
   grid-template-columns: 5fr 2fr;
-  grid-template-rows: 1fr 4fr;
-  grid-gap: 8px;
-  grid-template-areas: "presets presets" "inputBox button";
+  grid-column-gap: 8px;
+  grid-template-areas: "inputBox button";
 }
 
 @media (min-width: 768px) {
@@ -181,20 +187,21 @@ nav .logo h1 {
 
 @media (min-width: 768px) {
   #input {
-    grid-template-columns: 1fr 4fr 2fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 6fr 2fr;
     grid-column-gap: 16px;
-    grid-template-areas: "presets inputBox button";
+    grid-template-areas: "inputBox button";
   }
 }
 
 #input .question-input {
   grid-area: inputBox;
-  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 #input textarea {
   padding: 8px 10px 8px 10px;
+  z-index: 3;
   overflow: scroll;
   width: 100%;
   height: 100%;
@@ -204,28 +211,12 @@ nav .logo h1 {
   border: none;
   resize: none;
   font-family: 'Muli', sans-serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  transition: .2s ease;
 }
 
 #input textarea:hover, #input textarea:active {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-}
-
-#input .show-presets {
-  grid-area: presets;
-  background-color: #EF223C;
-  font-family: 'Montserrat',sans-serif;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.24);
-  font-size: 1.25rem;
-  outline: none;
-  border: none;
-  color: #EDF2F4;
-  transition: .2s ease;
-}
-
-#input .show-presets:hover, #input .show-presets:active {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  background-color: #f13a51;
 }
 
 #input .send {
@@ -240,9 +231,14 @@ nav .logo h1 {
   transition: .2s ease;
 }
 
-#input .send:hover, #input .send:active {
+#input .send:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   background-color: #f13a51;
+}
+
+#input .send:active {
+  background-color: #EDF2F4;
+  color: #EF223C;
 }
 
 footer {
@@ -257,7 +253,7 @@ footer {
 }
 
 #feedHeader {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   margin-top: 0;
   margin-bottom: -16px;
   margin-right: 8px;
@@ -267,7 +263,7 @@ footer {
   background-color: #323639;
   color: #EDF2F4;
   display: flex;
-  padding-left: 16px;
+  justify-content: center;
   align-items: center;
 }
 
@@ -279,14 +275,14 @@ footer {
 }
 
 #app {
-  height: 100vh;
+  max-height: 100vh;
   overflow: hidden;
   padding: 0;
   margin: 0 auto;
   display: grid;
   grid-gap: 8px;
   grid-template-columns: 100%;
-  grid-template-rows: 48px 40px 450px 160px;
+  grid-template-rows: 8vh 5vh 58vh 25vh;
   grid-template-areas: "header"  "feedHeader" "feed"  "input";
   background-color: #8D99AE;
 }
@@ -294,8 +290,8 @@ footer {
 @media (min-width: 768px) {
   #app {
     grid-gap: 16px;
-    grid-template-columns: .5fr .5fr;
-    grid-template-rows: 48px 5vh 60vh 18vh auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 8vh 5vh 50vh 25vh auto;
     grid-template-areas: "header header"  "slideHeader feedHeader" "slides feed" "slides input" ". .";
   }
 }
