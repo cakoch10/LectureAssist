@@ -104,6 +104,7 @@ def getCount(feedItem):
         count = countDict[feedItem]["count"]
     return count
 
+
 @socketio.on('Get Json')
 def getJson(feedItem):
     count = getCount(feedItem)
@@ -111,7 +112,6 @@ def getJson(feedItem):
     with open('solocount.json', 'w') as f:
         json.dump(returnDict, f)
     return
-
 
 
 #@socketio.on('Submit Question')
