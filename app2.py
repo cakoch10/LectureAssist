@@ -68,7 +68,7 @@ def addQuestion(question):
         quest = json.load(f)
     for questionToCompare in quest:
         s = similiarity(keywords, quest[questionToCompare])
-        if s > .75:
+        if s >= .5:
             # we need to return a positive count
             return questionToCompare
     # at this point the question is new
@@ -152,7 +152,7 @@ def submit_question(question):
     question = question.replace('\n', '').replace('\t', '').strip().lower()
     returnedQuest = addQuestion(question)
     if returnedQuest != None:
-        if returnedQuest.lower() == question.lower():
+        if returnedQuest.lower() == question:
             with open('counts.json') as f:
                 countDict = json.load(f)
                 print(countDict)
@@ -180,4 +180,4 @@ def submit_question(question):
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, port=80, debug=True)
