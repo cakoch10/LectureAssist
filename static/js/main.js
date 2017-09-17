@@ -84,6 +84,15 @@ window.onload = function () {
           app.newQuestionText = '';
           app.newCounter = 0;
         } else {
+          for (var i = 0; i < app.questions.length; i++) {
+            console.log(app.questions[i].text + " - " + this.newQuestionText)
+            if (app.questions[i].text == this.newQuestionText) {
+              socket.emit('upvote', app.questions[i].text);
+              canAskAgain = false;
+              wait();
+              return;
+            }
+          }
           socket.emit('message', this.newQuestionText);
           canAskAgain = false;
           wait();

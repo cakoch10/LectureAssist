@@ -68,7 +68,7 @@ def addQuestion(question):
         quest = json.load(f)
     for questionToCompare in quest:
         s = similiarity(keywords, quest[questionToCompare])
-        if s > 0.5:
+        if s > .75:
             # we need to return a positive count
             return questionToCompare
     # at this point the question is new
@@ -108,8 +108,6 @@ def handle_my_custom_event(json):
 @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message)
-    emit('new question', message, broadcast=True)
-    # send(message)
     submit_question(message)
     
 
@@ -150,6 +148,7 @@ def getJson(feedItem):
 
 #@socketio.on('Submit Question')
 def submit_question(question):
+    question_orig = question
     question = question.replace('\n', '').replace('\t', '').strip()
     returnedQuest = addQuestion(question)
     if returnedQuest != None:
@@ -157,9 +156,17 @@ def submit_question(question):
             with open('counts.json') as f:
                 countDict = json.load(f)
                 print(countDict)
-                countDict[returnedQuest] = 0
-            with open("counts.json", 'w') as f:
-                json.dump(countDict, f)
+                if (returnedQuest in countDict):
+                    countDict[returnedQuest] += 1
+                    emit('upvoted_question', returnedQuest, broadcast=True);
+                    with open("counts.json", 'w') as f:
+                        json.dump(countDict, f)
+                    return;
+                else: 
+                    countDict[returnedQuest] = 0
+                    with open("counts.json", 'w') as f:
+                        json.dump(countDict, f)
+                    emit('new question', question, broadcast=True)
         else:
             with open('counts.json') as f:
                 countDict = json.load(f)
@@ -167,7 +174,7 @@ def submit_question(question):
                 countDict[returnedQuest] += 1
             with open("counts.json", 'w') as f:
                 json.dump(countDict, f)
-            emit('upvoted_question', returnedQuest)
+            emit('upvoted_question', returnedQuest, broadcast=True)
         print('Question Submitted: ' + str(question))
         
 
