@@ -22,6 +22,11 @@ def similiarity(keywords1, keywords2):
     return 1.0*counter/(len(keywords1) + len(keywords2))
 
 
+
+def getSentence(question):
+
+
+
 '''
 Takes a string of text that represents a question and store it
 also compare the string to all existing strings
@@ -39,15 +44,30 @@ def getText():
         # keywords = entities_text(question)
         request_url = \
             "https://language.googleapis.com/" + \
-            "v1/documents:analyzeEntities?key=" \
+            "v1/documents:analyzeSyntax?key=" \
             + "AIzaSyCchGgYUMgG5BYF1mLBxHad-Z6J4jrrVlw"
         string_request = {}
         string_request["encodingType"] = "UTF8"
-        string_request["document"] = []
-        string_request["document"].append({"type": "PLAIN_TEXT"})
-        string_request["document"].append({"content": question})
+        string_request["document"] = {}
+        string_request["document"]["type"] = "PLAIN_TEXT"
+        string_request["document"]["content"] = question
         r = requests.post(request_url, json=string_request)
         response = json.loads(r.text)
+        # check if there at least one noun and a verb
+        tags = []
+        firstWord = response['tokens'][0]['lemma'].lower()
+        for tok in response['tokens']:
+            tag = tok['partOfSpeech']['tag'].lower()
+            tags.append(tag)
+        # make sure is a valid question
+        interrogatives = ["which", "what", "whose", "who", "whom"]
+        interrogatives += ["where", "how", "can", "why", "wait"]
+        
+        if firstWord in interrogatives and "noun" in tags and "verb" in tags:
+            return true
+
+
+
         keywords = []
         for e in response["entities"]:
             keyword = e["name"]
