@@ -1,5 +1,5 @@
 // Color Palette
-$baseColor: #2B2D42;
+$baseColor: #323639;
 $subColor: #8D99AE;
 $contrastColor: #EDF2F4;
 $weakAccentColor: #EF223C;
@@ -66,6 +66,26 @@ nav {
     0 3px 6px rgba(0, 0, 0, 0.24);
 }
 
+#slideHeader {
+  grid-area: slideHeader;
+  font-family: 'Montserrat',
+  sans-serif;
+  margin-top: 0;
+  margin-bottom: -16px;
+  @media (min-width: 768px) {
+    margin-left: 16px;
+    margin-right: 0;
+  }
+  margin-right: 8px;
+  margin-left: 8px;
+  z-index: 2;
+  background-color: $baseColor;
+  color: $contrastColor;
+  display: flex;
+  padding-left: 16px;
+  align-items: center;
+}
+
 #slides {
   grid-area: slides;
   @media (min-width: 768px) {
@@ -73,6 +93,14 @@ nav {
   }
   margin: 0px 8px 0px 8px;
   background-color: $contrastColor;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  .pdf-viewer {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 }
 
 #feed {
@@ -218,8 +246,7 @@ footer {
   background-color: $navBackgroundColor
 }
   #feedHeader {
-    font-family: 'Montserrat',
-    sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin-top:0;
     margin-bottom: -16px;
     @media (min-width: 768px) {
@@ -228,7 +255,6 @@ footer {
     }
     margin-right: 8px;
     margin-left: 8px;
-    
     z-index: 2;
     grid-area: feedHeader;
     background-color: $baseColor;
@@ -237,9 +263,10 @@ footer {
     padding-left: 16px;
     align-items: center;
   }
+
 #app {
-  min-height: 100vh;
-  max-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   padding: 0;
   margin: 0 auto;
   display: grid;
@@ -249,20 +276,19 @@ footer {
     grid-template-rows: 48px 5vh 60vh 18vh auto;
     grid-template-areas: 
       "header header" 
-      "slides feedHeader"
+      "slideHeader feedHeader"
       "slides feed"
       "slides input"
       ". .";
   }
   grid-gap: 8px;
   grid-template-columns: 100%;
-  grid-template-rows: 48px .05fr 1fr 150px auto;
+  grid-template-rows: 48px 40px 450px 160px;
   grid-template-areas: 
     "header" 
     "feedHeader"
     "feed" 
-    "input" 
-    "footer";
+    "input";
   background-color: $subColor;
 }
 

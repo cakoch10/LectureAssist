@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
-from flask_socketio import SocketIO
+from flask import Flask, render_template
+import requests
+from flask_socketio import SocketIO, send, emit
 import json
 
 app = Flask(__name__)
@@ -25,10 +26,10 @@ def addQuestion(question):
         + "AIzaSyCchGgYUMgG5BYF1mLBxHad-Z6J4jrrVlw"
     string_request = {}
     string_request["encodingType"] = "UTF8"
-    string_request["document"] = []
-    string_request["document"].append({"type": "PLAIN_TEXT"})
-    string_request["document"].append({"content": question})
-    r = request.post(request_url, json=string_request)
+    string_request["document"] = {}
+    string_request["document"]["type"] = "PLAIN_TEXT"
+    string_request["document"]["content"] = question
+    r = requests.post(request_url, json=string_request)
     response = json.loads(r.text)
     keywords = []
     for e in response["entities"]:
@@ -36,17 +37,17 @@ def addQuestion(question):
         keywords.append(keyword)
 
     with open('questions.json') as f:
-        quest = json.loads(f)
+        quest = json.load(f)
     for questionToCompare in quest:
         s = similiarity(keywords, quest[questionToCompare])
         if s > 0.5:
             # we need to return a positive count
-            return 1
+            return questionToCompare
     # at this point the question is new
     quest[question] = keywords
     with open('questions.json', 'w') as f:
         json.dump(quest, f)
-    return 0
+    return question
 
 def getMessages(keywords=[]):
     returnList = []
@@ -80,10 +81,13 @@ def handle_my_custom_event(json):
 def handle_message(message):
     print('received message: ' + message)
     send(message)
+    submit_question(message)
+
 
 
 @socketio.on('Upvote Feed Item')
 def upvote(feedItem):
+    print("upvoting: " + feedItem)
     with open('counts.json') as f:
         countDict = json.load(f)
         countDict[feedItem]["count"] += 1
@@ -110,13 +114,15 @@ def getJson(feedItem):
 
 
 
-@socketio.on('Submit Question')
+#@socketio.on('Submit Question')
 def submit_question(question):
     c = addQuestion(question)
     if c == 1:
         with open('counts.json') as f:
             countDict = json.load(f)
             countDict[question]["count"] += 1
+    else:
+
     print('Question Submitted: ' + str(question))
 
 
